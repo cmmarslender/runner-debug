@@ -31,3 +31,11 @@ jobs:
           dpkg-query -W --showformat='${Installed-Size}\t${Package}\n' \
             | sort -nr \
             | awk '{printf "%s\t%s MB\n", $2, $1/1024}'
+
+      - name: Uninstall some junk
+        run: |
+          sudo apt remove --purge microsoft-edge-stable azure-cli google-cloud-cli google-chrome-stable temurin-21-jdk temurin-17-jdk temurin-11-jdk temurin-25-jdk firefox temurin-8-jdk powershell google-cloud-cli-anthoscli mysql-server-core-8.0  
+
+      - name: Show Free Space
+        run: |
+          df -h
