@@ -21,11 +21,13 @@ jobs:
         runner:
           - name: ubuntu-latest
           - name: ubuntu-22.04
-          - name: ubuntu-slim
     steps:
       - name: Show Free Space
         run: |
           df -h
 
-      - name: Docker?
-        run: docker --version
+      - name: See whats installed
+        run: |
+          dpkg-query -W --showformat='${Installed-Size}\t${Package}\n' \
+            | sort -nr \
+            | awk '{printf "%s\t%s MB\n", $2, $1/1024}'
